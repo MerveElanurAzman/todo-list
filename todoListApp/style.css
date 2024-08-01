@@ -1,0 +1,141 @@
+.card,.menu-search .form-control{
+    background-color: rgb(251, 242, 242);
+    border-style: none;
+    color: rgb(84, 81, 81);
+
+}
+
+.card-header,.input-group, .form-select,.menu-search {
+    background-color: rgb(251, 217, 217);
+    box-shadow: 0 1px 4px rgb(242, 187, 187); 
+    font-size: large;
+    border-style: none;
+    color: rgb(84, 81, 81);
+}
+
+
+
+
+
+.toast , .toast-body,.toast-body2 {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.shopping .toast, .shopping .icon
+{
+    background-color: #e1f5da;
+    box-shadow: 0 4px 8px #97ce83; 
+}
+.hobby .toast, .hobby .icon
+{
+    background-color: #fabbca;
+    box-shadow: 0 4px 8px rgb(212, 148, 163); 
+    
+}
+.housework .toast, .housework .icon
+{
+    background-color: #F4C09D;
+    box-shadow: 0 4px 8px rgb(209, 159, 126); 
+}
+.work .toast, .work .icon
+{
+    background-color: #D0E9E9;
+    box-shadow: 0 4px 8px rgb(168, 202, 202); 
+}
+.urgent .toast, .urgent .icon
+{
+    background-color: #f27d85;
+    box-shadow: 0 4px 8px rgb(201, 92, 100); 
+}
+.care .toast ,.care .icon
+{
+    background-color: #e7c9ee;
+    box-shadow: 0 4px 8px rgb(196, 162, 203); 
+    
+}
+.remainder .toast ,.remainder .icon
+{
+    background-color: #fff7c1;
+    box-shadow: 0 4px 8px rgb(214, 205, 147); 
+}
+
+.toast .icon
+{
+    height: 40px;
+    width: 40px;
+    border-style: none;
+
+}
+
+
+.listText p{
+    color: rgb(84, 81, 81);
+    font-size: 18px;
+    
+}
+
+
+
+.form-row{
+    height: 50px;
+    width: 95%;
+    border-color:rgb(242, 187, 187)k;
+    border-style: solid;
+    background-color: rgb(251, 217, 217);
+    box-shadow: 0 1px 4px rgb(242, 187, 187); 
+    font-size: large;
+    border-style: none;
+    color: rgb(84, 81, 81);
+    border-radius: 5px;
+    align-items: center;
+}
+
+
+.search-input .form-control{
+    border-style: none;
+    
+}
+
+.search-icon{
+    width: 25px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(243, 140, 140) ;
+}
+
+.form-control:focus ,.form-select:focus {
+    border-color: transparent !important; /* Kenarlık rengini tamamen kaldırır */
+    box-shadow: none !important; /* Gölgeyi kaldırır */
+    outline: none !important; /* Focus outline'ı kaldırır */
+}
+
+
+.input-group .input-group-text{
+    background-color:  rgb(251, 217, 217);
+    border:none;
+
+}
+
+.input-group .form-control{
+    border: none;
+}
+
+
+
+
+hr{
+             border: none; /* Kenarlığı kaldır */
+            height: 2px; /* Çizginin yüksekliği */
+            background-color: rgb(243, 140, 140); /* Çizginin rengi */
+            margin: 20px 0; /* Üst ve alt boşluk */
+}
+
+.input-group
+{
+    height: 50px;
+    padding: 5px;
+}
+
