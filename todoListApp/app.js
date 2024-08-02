@@ -112,10 +112,8 @@ function removeTodoToUI(e){
     const rowparent=  e.target.parentElement.parentElement;
   
     const sibling= rowparent.children[1];
-   // p etiketi içeriyorsa onun ilk çocuk öğesine (yani p etiketine) erişiyoruz
     const pElement = sibling.querySelector('p');
 
-  // p etiketinin metin içeriğini almak için textContent kullanıyoruz
     const siblingText = pElement.textContent;
 
 
