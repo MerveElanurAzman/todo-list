@@ -20,28 +20,104 @@ const categoryIcons = {
 
 let todos = [];
 let todo={
-    text:" " ,
-    category: ""
+    text:"" ,
+    category: "",
+    endDate: "",
+    checked:false,
+    index:0
+    
+}
+indx=0;
+
+function sortArray()
+{
+    todos.sort(function(a,b)
+{
+    let d1=new Date(a.endDate),
+    d2=new Date(b.endDate);
+    if(d1<d2)
+    {
+        return -1;
+    }
+    if(d1>d2)
+    {
+        return 1;
+    }
+    
+});
+console.log(todos);
+
 }
 
 
 runEvents();
 
- 
 function runEvents() {
     form.addEventListener("submit", addTodo);
     document.addEventListener("DOMContentLoaded",pageLoaded);
     secondCardBody.addEventListener("click",clickFunction);
     clearButton.addEventListener("click",allTodosEverywhere);
     filterInput.addEventListener("keyup",filter);
+    
 }
 
 function pageLoaded(){
+    indx=0;
     checkTodosFromStorage();
-    todos.forEach(function(todo)
+    if(todos.length>0)
     {
-       addTodoToUI(todo);
-    });
+
+             
+        sortArray();
+        todos.forEach(function(todo)
+                {
+                addTodoToUI(todo);
+                });
+    }
+    else {
+        emptyTodo();
+        
+    }
+    
+
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = String(today.getMonth() + 1).padStart(2, '0'); // Aylar 0-11 arasında olduğu için +1
+    var day = String(today.getDate()).padStart(2, '0');
+    var minDateTime = `${year}-${month}-${day}`;
+
+    document.getElementById("endDate").setAttribute("min", minDateTime);
+}
+function emptyTodo()
+{
+    const div = document.createElement("div");
+   
+   
+    div.className="empty-card col-md-12  ";
+
+
+
+
+
+    div.innerHTML = `
+
+        <div class="card-body">
+            <div class="row justify-content-center ">
+                <div class="col-5 m-t-30 ">
+                    <h4 >YAPILICAK AKTİVİTE YOK</h4>
+                   
+                </div>
+            </div>
+        </div>
+        
+                           
+    `;
+
+
+
+
+    todoList.appendChild(div);
+    
 }
 
 function filter(e){
@@ -66,44 +142,77 @@ function filter(e){
 
 function allTodosEverywhere(){
    
-   const todoListesi = document.querySelectorAll(".list-group-item");
-   if(todoListesi.length>0){
-    //Ekrandan Silme
-    todoListesi.forEach(function(todo)
-    {
-        todo.remove();
-    });
+    var txt;
+         if (confirm("Tüm yapılacakları silmek istediğinze emin misiniz?"))  {
+         const todoListesi = document.querySelectorAll(".list-group-item");
+            if(todoListesi.length>0){
+                //Ekrandan Silme
+                todoListesi.forEach(function(todo)
+                    { 
+                    todo.remove();
+                    });
 
-    //Storage'dan Silme
-    todos=[];
-    localStorage.setItem("todos",JSON.stringify(todos));
-    showAlert("success","Başarılı bir şekilde silindi");
-   }
-   else
-   {
-    showAlert("warning","Silmek için en az bir todo olmalıdır");
-   }
+            //Storage'dan Silme
+            todos=[];
+            indx=0;
+            localStorage.setItem("todos",JSON.stringify(todos));
+            emptyTodo();
+            showAlert("success","Başarılı bir şekilde silindi");
+             }
+             else
+            {
+                showAlert("warning","Silmek için en az bir todo olmalıdır");
+            }
+
+        }
+        
+        else {
+            showAlert("warning","Silme işlemi iptal edildi");
+        }
+   
 }
 
 function clickFunction(e)
 {
+    
     if(e.target.type=="checkbox")
     {
+    
+        const index = Number(e.target.className[0]);
+
+        // Todo öğesini bulun
+        const eleman = todos.find(todo => todo.index === index);
+
+
         const checkbox=e.target;
         const parent=checkbox.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+       
+        
         const text= parent.children[1].querySelector('p');
         if (checkbox.checked) {
+            eleman.checked= true;
             text.style.textDecoration = 'line-through';
         }
         else 
         {
+            eleman.checked= false;
             text.style.textDecoration = 'none';
         }
+
+        localStorage.setItem("todos", JSON.stringify(todos));
     }
     else if(e.target.type=="button"){
+        var txt;
+         if (confirm("Silmek istediğinze emin misiniz?"))  {
+         removeTodoToUI(e);
+        }
+        else {
+            showAlert("warning","Silme işlemi iptal edildi");
+        }
+  
 
 
-        removeTodoToUI(e);
+        
     }
 }
 
@@ -120,12 +229,18 @@ function removeTodoToUI(e){
 
     const parentElement=rowparent.parentElement.parentElement.parentElement.parentElement;
    const todo = parentElement;
+
+   indx--;
   
 
    todo.remove();
   
    removeTodoToStorage(siblingText);
    showAlert("success","Todo başarıyla silindi.");
+   if(todos.length==0)
+   {
+    emptyTodo();
+   }
     
    
     
@@ -143,31 +258,48 @@ function addTodo(e) {
     e.preventDefault(); 
     const inputText = addInput.value.trim();
     const selectedCategory = document.getElementById("form-select").value;
+    const date = document.getElementById("endDate").value;
+    
     
    
     if (inputText == null || inputText == "") {
         showAlert("warning", "Lütfen boş bırakmayınız!");
     } else {
+        indx++;
         const newTodo = {
             text: inputText,
-            category: selectedCategory
+            category: selectedCategory,
+            endDate: date,
+            index: indx,
+            checked:false
         };
         addTodoToUI(newTodo);
         addTodoToStorage(newTodo);
         showAlert("success", "Todo Eklendi.");
         addInput.value="";
+        
     }
 
  
 }
 
+
+
 function addTodoToUI(todo) {
+   if(todos.length==0)
+   {
+    const removeElement=todoList.querySelector(".empty-card ");
+    const removeParent=removeElement.parentNode;
+    removeParent.removeChild(removeElement);
+   }
     const iconClass = categoryIcons[todo.category];
     const li = document.createElement("li");
-    li.className="list-group-item";
+    const idx= todo.index;
 
+
+    li.className="list-group-item col-6 ";
     li.innerHTML = `
-        <div class="${todo.category} row ms-2 mt-3">
+        <div class="${todo.category}  row ms-2 mt-3">
             <div class="toast d-flex align-items-center border-0">
                 <div class="toast-body">
                     <div class="toast-body2 align-items-center font-medium">
@@ -181,8 +313,8 @@ function addTodoToUI(todo) {
                                     </div>
                                     <div class="col-1 ms-4 d-flex align-items-center">
                                         <div class="checkbox-wrapper-33">
-                                            <label class="checkbox">
-                                                <input class="checkbox__trigger visuallyhidden" type="checkbox">
+                                            <label class="checkbox  ">
+                                                <input class="${idx} checkbox__trigger visuallyhidden" type="checkbox">
                                                 <span class="checkbox__symbol">
                                                     <svg aria-hidden="true" class="icon-checkbox" width="28px" height="28px" viewBox="0 0 28 28" version="1" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M4 14l8 7L24 7"></path>
@@ -193,10 +325,19 @@ function addTodoToUI(todo) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="listText col d-flex align-items-center">
-                                <p>${todo.text}</p>
-                            </div>
-                            <div class="col-1 d-flex align-items-center">
+                             <div class="col-9">
+                                <div class="row">
+                                    <div class="todoText col-12 d-flex align-items-center">
+                                        <p>${todo.text}</p>
+                                    </div>
+                                    <div  class="todoDate col-3">
+                                        <p>End date: ${todo.endDate}</p>
+                                    </div>
+                                </div>
+
+                               </div>
+                    
+                            <div class="col-1 offset-ms-3 d-flex align-items-center ">
                                 <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="toast" aria-label="Close">
                                     <i data-feather="x" class="feather-sm fill-white text-info"></i>
                                 </button>
@@ -208,11 +349,28 @@ function addTodoToUI(todo) {
         </div>
     `;
 
-    todoList.appendChild(li);
-  
+
+    const text=li.querySelector('p');
+    const checkbox=li.querySelector('input');
+ 
+    if(todo.checked==true)
+    {
+        checkbox.checked=true;
+
+        text.style.textDecoration = 'line-through';
+
+
+    }
+    else 
+    {
+        checkbox.checked=false;
+        text.style.textDecoration = 'none';
+    }
+    todoList.appendChild(li, todoList.firstChild);
+
 }
 
-function addTodoToStorage(newTodo,selectedCategory) {
+function addTodoToStorage(newTodo) {
     checkTodosFromStorage();
     todos.push(newTodo);
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -227,13 +385,9 @@ function checkTodosFromStorage() {
 }
 
 function showAlert(type, message) {
-    /*
-    <div class="alert alert-warning" role="alert">
-    This is a warning alert—check it out!
-  </div>*/
+ 
     const div = document.createElement("div");
-    //   div.className="alert alert-"+type;
-    div.className = `alert alert-${type}`; //litirel template
+    div.className = `alert alert-${type}`; 
     div.textContent = message;
 
     firstCardBody.appendChild(div);
@@ -242,3 +396,4 @@ function showAlert(type, message) {
         div.remove();
     },2500);
 }
+

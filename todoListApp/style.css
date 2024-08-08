@@ -122,7 +122,9 @@
 }
 
 
-
+.form-row {
+    width: 100%;
+}
 
 hr{
              border: none; /* Kenarlığı kaldır */
@@ -137,16 +139,83 @@ hr{
     height: 50px;
     padding: 5px;
 }
-ul{
+div{
     
     border: none;
 }
 
 
-ul.list-group {
+.list-group {
     list-style: none; 
     padding: 0; 
     margin: 0; 
+    display: flex;
+    flex-wrap: wrap; /* Elemanların yeni satıra geçmesine izin verir */
+    gap: 10px;
     
+}
+.list-group-item {
+    flex: 1 1 calc(50% - 10px); /* Genişliği yüzde 50, aradaki boşluktan dolayı -10px */
+    box-sizing: border-box; /* Kenarlıkları dahil ederek hesaplar */
+}
+
+
+
+#endDate{
+    background-color: rgb(251, 217, 217);
+    box-shadow: 0 1px 4px rgb(242, 187, 187); 
+    font-size: large;
+    border-style: none;
+    color: rgb(84, 81, 81);
+
+}
+
+.todoText
+{
+  
+    font-size: 18px;
+    padding-right: 0;
+}
+.todoDate
+{
+   font-size: 11px;
+   color: rgba(0, 0, 0, 0.49);
+   padding-left: 1.5%;
+
+}
+
+
+.icon,
+.checkbox-wrapper-33 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* .todoText ve .todoDate dikeyde ortalama */
+.todoText p, 
+.todoDate p {
+    margin-bottom: 0; /* Varsayılan alt boşluğu kaldırma */
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+
+.empty-card .col-5{
+    text-align: center;
+    align-items: center;
+    background-color: rgba(255, 99, 71, 0.697);
+    color: white;
+    padding: 4% 10% 4% 10%;
+
+    margin: 3%;
+
+}
+
+.calender ul{
+    display: flex;
 }
 

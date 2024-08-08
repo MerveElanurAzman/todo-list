@@ -31,7 +31,13 @@
                                         </div>
 
                                     </div>
-                                    <div class="select col-md-4">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control" type="date" id="endDate" name="endDate" min="${today}" onkeydown="return false;" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="select col-md-2">
                                         <select class="form-select" id="form-select" aria-label="Default select example">
                                             <option selected class="hobby" value="hobby">Hobi</option>
                                             <option class="care" value="care">Bakım</option>
@@ -47,6 +53,7 @@
     
                                 </div>
 
+            
                                 <div class="row ms-4">
                                     <div class="col-md-2">
                                         <button type="submit" class="btn btn-outline-danger" id="todoAddButton">Todo Ekleyin</button>
@@ -63,13 +70,13 @@
                 <div class="card-body">
                     <h5 class="card-title">Todo Listesi</h5>
 
-                    <div class="row mt-2 ms-2">
+                    <div class="row search-row mt-2 ms-2">
                         <form class="search active" id="todoListForm">
                             <div class="form-row row ">
                                 <div class="search-input col-11">
                                     <input type="text" id="todoSearch" placeholder="Search..." class="form-control"> 
                                 </div>
-                                <div class="search-icon col-1">
+                                <div class="search-icon col-1 ms-4">
                                
                                     <span class="icon">
                                         <i class="fa fa-search"></i>
@@ -83,9 +90,13 @@
                     </div>
 
                     <hr>
-                
+                <div class="calendar">
                     <ul class="list-group" id="list-group">
+
                     </ul>
+
+                </div>
+                    
 
                 </div>
       
