@@ -296,6 +296,7 @@ function addTodoToUI(todo) {
     const li = document.createElement("li");
     const idx= todo.index;
 
+    
 
     li.className="list-group-item col-6 ";
     li.innerHTML = `
