@@ -30,7 +30,7 @@
 
 .toast , .toast-body,.toast-body2 {
     width: 100%;
-    max-width: 1000px;
+    max-width: 100%;
 }
 
 .shopping .toast, .shopping .icon
@@ -54,7 +54,7 @@
     background-color: #D0E9E9;
     box-shadow: 0 4px 8px rgb(168, 202, 202); 
 }
-.urgent .toast, .urgent .icon
+.urgent .toast, .urgent .icon 
 {
     background-color: #f27d85;
     box-shadow: 0 4px 8px rgb(201, 92, 100); 
@@ -71,13 +71,6 @@
     box-shadow: 0 4px 8px rgb(214, 205, 147); 
 }
 
-.toast .icon
-{
-    height: 40px;
-    width: 40px;
-    border-style: none;
-
-}
 
 
 .listText p{
@@ -95,15 +88,26 @@
     border-style: none;
     
 }
+.search-input {
+    width: 96%;
+    display: flex;
+    align-items: center; /* Input ve ikonun aynı hizaya gelmesini sağlar */
+    margin: 0; /* Boşlukları sıfırlayın */
+}
 
 .search-icon{
-    width: 25px;
+    width: 2px;
     height: 35px;
     display: flex;
-    justify-content: center;
+    margin: 0%;
+    justify-content: flex-end;
     align-items: center;
     color:rgb(243, 140, 140) ;
 }
+.search-icon .icon{
+    padding-right: 10px;
+}
+
 
 .form-control:focus ,.form-select:focus {
     border-color: transparent !important; /* Kenarlık rengini tamamen kaldırır */
@@ -148,16 +152,17 @@ div{
 
 .list-group {
     list-style: none; 
-    padding: 0; 
-    margin: 0; 
+    padding: 0%; 
+    margin: 0%; 
     display: flex;
-    flex-wrap: wrap; /* Elemanların yeni satıra geçmesine izin verir */
-    gap: 10px;
+ 
     
 }
 .list-group-item {
-    flex: 1 1 calc(50% - 10px); /* Genişliği yüzde 50, aradaki boşluktan dolayı -10px */
+    margin: 1%;
+    padding: 0%;
     box-sizing: border-box; /* Kenarlıkları dahil ederek hesaplar */
+    
 }
 
 
@@ -173,7 +178,6 @@ div{
 
 .todoText
 {
-  
     font-size: 18px;
     padding-right: 0;
 }
@@ -192,6 +196,14 @@ div{
     align-items: center;
     justify-content: center;
 }
+.toast .icon
+{
+    height: 40px;
+    width: 40px;
+    border-style: none;
+
+}
+
 
 
 
@@ -218,5 +230,21 @@ div{
 
 .calender ul{
     display: flex;
+}
+
+
+.remove-todo{
+    justify-content: flex-end;
+    align-items: end;
+    margin-right: 0;
+    padding-right: 0;
+    margin-left: 7%;
+
+
+}
+.todo-context{
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
 }
 

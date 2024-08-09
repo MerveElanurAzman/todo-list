@@ -1,11 +1,9 @@
-
 const form = document.querySelector("#todoAddForm");
 const addInput = document.querySelector("#todoName");
 const todoList = document.querySelector(".list-group");
 const firstCardBody = document.querySelectorAll(".card-body")[0];
 const secondCardBody = document.querySelectorAll(".card-body")[1];
 const clearButton = document.querySelector("#clearButton");
-
 const filterInput = document.querySelector("#todoSearch");
 
 const categoryIcons = {
@@ -17,7 +15,7 @@ const categoryIcons = {
     shopping: "fa-shopping-bag",
     remainder: "fa-bell"
 };
-
+indx=0;
 let todos = [];
 let todo={
     text:"" ,
@@ -27,7 +25,7 @@ let todo={
     index:0
     
 }
-indx=0;
+
 
 function sortArray()
 {
@@ -48,8 +46,6 @@ function sortArray()
 console.log(todos);
 
 }
-
-
 runEvents();
 
 function runEvents() {
@@ -283,8 +279,6 @@ function addTodo(e) {
  
 }
 
-
-
 function addTodoToUI(todo) {
    if(todos.length==0)
    {
@@ -298,13 +292,14 @@ function addTodoToUI(todo) {
 
     
 
-    li.className="list-group-item col-6 ";
+    li.className="list-group-item ";
+    li.setAttribute("draggble","true");
     li.innerHTML = `
-        <div class="${todo.category}  row ms-2 mt-3">
+        <div class="${todo.category} row ms-2 mt-3">
             <div class="toast d-flex align-items-center border-0">
                 <div class="toast-body">
-                    <div class="toast-body2 align-items-center font-medium">
-                        <div class="row">
+                    <div class="toast-body2 font-medium">
+                        <div class="row todo-context">
                             <div class="col-1 me-2">
                                 <div class="row">
                                     <div class="col-2 d-flex align-items-center">
@@ -326,7 +321,7 @@ function addTodoToUI(todo) {
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-9">
+                            <div class="col-9">
                                 <div class="row">
                                     <div class="todoText col-12 d-flex align-items-center">
                                         <p>${todo.text}</p>
@@ -336,9 +331,9 @@ function addTodoToUI(todo) {
                                     </div>
                                 </div>
 
-                               </div>
+                            </div>
                     
-                            <div class="col-1 offset-ms-3 d-flex align-items-center ">
+                            <div class="col-1 remove-todo d-flex align-items-center ">
                                 <button type="button" class="btn-close ms-auto me-2 d-flex align-items-center" data-bs-dismiss="toast" aria-label="Close">
                                     <i data-feather="x" class="feather-sm fill-white text-info"></i>
                                 </button>
